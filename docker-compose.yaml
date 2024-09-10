@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:8080"
+    depends_on:
+      - nodejs
+  
+  nodejs:
+    build: ./nodejs
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+  postgres:
+    build: ./postgres
+    environment:
+      POSTGRES_USER: andresn
+      POSTGRES_PASSWORD: teste123
+      POSTGRES_DB: postgres
+    ports:
+    - "5432:5432"
